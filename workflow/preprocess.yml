@@ -1,0 +1,42 @@
+name: Automated Preprocessing Pipeline
+
+# Trigger: Jalan setiap ada push ke branch main, atau dijalankan manual
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-process:
+    runs-on: ubuntu-latest  # Robotnya pakai Ubuntu Linux
+
+    steps:
+    # 1. Ambil kodingan dari repo kamu
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # 2. Install Python
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.9"
+
+    # 3. Install Library yang dibutuhkan (pandas, scikit-learn)
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas scikit-learn joblib
+
+    # 4. EKSEKUSI SCRIPT AUTOMATE KAMU
+    # Pastikan path ini sesuai dengan nama file kamu
+    - name: Run Preprocessing Script
+      run: |
+        python preprocessing/automate_Ida_Bagus_Panya_Ananda_Yogi.py
+
+    # 5. Simpan Hasilnya sebagai Artefak (Bisa didownload)
+    - name: Upload Processed Data
+      uses: actions/upload-artifact@v4
+      with:
+        name: dataset-hasil-preprocessing
+        path: preprocessing/heart_failure_preprocessing/
+        retention-days: 5
