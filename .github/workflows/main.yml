@@ -31,7 +31,7 @@ jobs:
     # Pastikan path ini sesuai dengan nama file kamu
     - name: Run Preprocessing Script
       run: |
-        python preprocessing/automate_Ida Bagus Panya Ananda Yogi.py
+        python preprocessing/automate_Ida_Bagus_Panya_Ananda_Yogi.py
 
     # 5. Simpan Hasilnya sebagai Artefak (Bisa didownload)
     - name: Upload Processed Data
